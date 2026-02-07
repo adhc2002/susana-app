@@ -1,0 +1,22 @@
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  body { background-color: #1c1c1e; color: white; font-family: sans-serif; }
+  .btn { background: #007aff; border: none; padding: 15px; width: 100%; border-radius: 10px; color: white; font-size: 18px;}
+</style>
+
+<h1>💎 Recarga Saldo</h1>
+<p>Envía 5 USDT a:</p>
+<div style="background: #333; padding: 10px; border-radius: 8px;">TFrqe... (Tu Wallet)</div>
+<br>
+<button class="btn" onclick="avisarPago()">✅ Ya Pagué</button>
+
+<script>
+  // Inicializar la Mini App
+  const tg = window.Telegram.WebApp;
+  tg.expand(); // Ocupar toda la pantalla
+
+  function avisarPago() {
+    // Esto envía datos de vuelta a tu Python sin que el usuario escriba nada
+    tg.sendData("pago_realizado_5usd"); 
+  }
+</script>
