@@ -264,6 +264,7 @@
 
     <script>
         const tg = window.Telegram.WebApp;
+        tg.ready();
         tg.expand();
         tg.setHeaderColor('#050505');
 
@@ -290,17 +291,16 @@
             tg.HapticFeedback.impactOccurred('heavy');
             
             // EL TRUCO PARA QUE NO FALLE:
-            if (tg.sendData) {
-                tg.sendData("pay_stars_" + amount);
-                tg.close();
-            } else {
-                tg.showPopup({
-                    title: '⚠️ Acción Necesaria',
-                    message: 'Para procesar pagos seguros, por favor abre el Club VIP desde el botón de MENÚ (abajo a la izquierda del chat).',
-                    buttons: [{type: 'ok', text: 'Entendido'}]
-                });
-            }
+         try {
+            tg.sendData("pay_stars_" + amount);
+            // No pongas tg.close() aquí todavía, deja que el bot procese.
+            // O si lo pones, asegúrate de que sendData se ejecutó.
+            setTimeout(() => { tg.close(); }, 100); 
+        } catch (e) {
+            alert("Error: Abre la app desde el botón de menú inferior.");
         }
+    }
     </script>
 </body>
 </html>
+
